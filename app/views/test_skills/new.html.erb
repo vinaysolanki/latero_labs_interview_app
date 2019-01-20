@@ -1,0 +1,31 @@
+<h2>Add a Test Skill</h2>
+
+<% if @test_skill.errors.any? %>
+  <div id="error-explanation" %>
+    <h2>
+      <%= pluralize(@test_skill.errors.count, "error") %> prevented this Test Skill from being saved:
+    </h2>
+    <ul>
+      <% @test_skill.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+<p>
+  <strong>Interview Name: </strong>
+  <%= @interview.name %>
+</p>
+
+<%= form_for :test_skill, url: interview_test_skills_path(@interview) do |f| %>
+  <p>
+    <%= f.label "Skill Name" %>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
