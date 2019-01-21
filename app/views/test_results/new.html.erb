@@ -1,16 +1,21 @@
 <h2>Add a New Test Result</h2>
 
 
-<%= form_for :test_result, url: interview_test_results_path do |f| %>
+<%= form_for @test_result, url: interview_test_results_path do |f| %>
   <p>
     <%= f.label "Candidate Name: " %>
     <%= f.text_field :candidate_name %>
   </p>
 
-  <%= @interview.test_skills.each do |test_skill| %>
-    <p>
-      <%= f.label test_skill.name %>
-    </p>
+  <%= fields_for :test_scores do |test_score_form| %>
+    <% @test_result.interview.test_skills.each do |test_skill| %>
+      <p>
+        <%= test_score_form.label test_skill.name %>
+        <%= test_score_form.text_field test_skill.id %>
+      </p>
+    <% end %>
   <% end %>
+
+  <%= f.submit "Submit" %>
 
 <% end %>

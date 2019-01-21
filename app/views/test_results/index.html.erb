@@ -14,6 +14,13 @@
       <% test_result.test_scores.each do |test_score| %>
         <td><%= test_score.score %></td>
       <% end %>
+      <td><%= link_to "Edit", edit_interview_test_result_path(@interview, test_result) %></td>
+      <td><%= link_to "Delete", interview_test_result_path(@interview, test_result),
+        method: :delete,
+        data: { confirm: "Are you sure you want to delete this Test Result?" } %></td>
     </tr>
   <% end %>
 </table>
+
+<br>
+<%= link_to "Go to Interviews", interviews_path %>

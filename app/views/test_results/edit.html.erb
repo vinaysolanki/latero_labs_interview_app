@@ -1,0 +1,21 @@
+<h2>Edit Test Result</h2>
+
+
+<%= form_for @test_result, url: interview_test_result_path(@interview, @test_result) do |f| %>
+  <p>
+    <%= f.label "Candidate Name: " %>
+    <%= f.text_field :candidate_name %>
+  </p>
+
+  <%= fields_for :test_scores do |test_score_form| %>
+    <% @test_result.test_scores.each do |test_score| %>
+      <p>
+        <%= test_score_form.label test_score.test_skill.name %>
+        <%= test_score_form.text_field test_score.id, value: test_score.score %>
+      </p>
+    <% end %>
+  <% end %>
+
+  <%= f.submit "Submit" %>
+
+<% end %>
