@@ -1,5 +1,6 @@
 class TestSkill < ApplicationRecord
   belongs_to :interview
+  has_many :test_scores, dependent: :destroy
   validates :name, presence: true
   before_save :capitalize_name
 

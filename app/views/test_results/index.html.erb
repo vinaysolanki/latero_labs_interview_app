@@ -1,0 +1,19 @@
+<h2><%= @interview.name %> Results</h2>
+
+<table>
+  <% @interview.test_results.each do |test_result| %>
+    <tr>
+      <th>Candidate Name</th>
+      <% test_result.test_scores.each do |test_score| %>
+        <th><%= test_score.test_skill.name %></th>
+      <% end %>
+    </tr>
+
+    <tr>
+      <td><%= test_result.candidate_name %></td>
+      <% test_result.test_scores.each do |test_score| %>
+        <td><%= test_score.score %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

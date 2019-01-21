@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_20_203208) do
+ActiveRecord::Schema.define(version: 2019_01_20_234646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,24 @@ ActiveRecord::Schema.define(version: 2019_01_20_203208) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "test_results", force: :cascade do |t|
+    t.string "candidate_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "interview_id"
+    t.index ["interview_id"], name: "index_test_results_on_interview_id"
+  end
+
+  create_table "test_scores", force: :cascade do |t|
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "test_result_id"
+    t.integer "test_skill_id"
+    t.index ["test_result_id"], name: "index_test_scores_on_test_result_id"
+    t.index ["test_skill_id"], name: "index_test_scores_on_test_skill_id"
   end
 
   create_table "test_skills", force: :cascade do |t|
