@@ -11,6 +11,6 @@ class TestResult < ApplicationRecord
   end
 
   def percentage
-    total_score / test_scores.count * 10
+    total_score / test_scores.count * 10 if test_scores
   end
 end
