@@ -1,12 +1,18 @@
 <h2><%= @interview.name %> Results</h2>
 
+<% unless @interview.test_results.any? %>
+  <h3>No Test Results to Show. Click below to add Test Results</h3>
+<% end %>
+
 <table>
-  <% @interview.test_results.each do |test_result| %>
+  <% @interview.test_results.top_results.each do |test_result| %>
     <tr>
       <th>Candidate Name</th>
       <% test_result.test_scores.each do |test_score| %>
         <th><%= test_score.test_skill.name %></th>
       <% end %>
+      <th>Total Score</th>
+      <th>Percentage(%)</th>
     </tr>
 
     <tr>
@@ -14,6 +20,9 @@
       <% test_result.test_scores.each do |test_score| %>
         <td><%= test_score.score %></td>
       <% end %>
+      <td><%= test_result.total_score %></td>
+      <td><%= test_result.percentage %>%</td>
+
       <td><%= link_to "Edit", edit_interview_test_result_path(@interview, test_result) %></td>
       <td><%= link_to "Delete", interview_test_result_path(@interview, test_result),
         method: :delete,
@@ -24,3 +33,4 @@
 
 <br>
 <%= link_to "Go to Interviews", interviews_path %>
+<%= link_to "Add new Test Result", new_interview_test_result_path(@interview) %>

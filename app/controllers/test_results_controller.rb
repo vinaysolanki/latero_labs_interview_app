@@ -19,6 +19,7 @@ class TestResultsController < ApplicationController
       params[:test_scores].each do |test_score|
         @test_result.test_scores.create(test_skill_id: test_score[0], score: test_score[1])
       end
+      @test_result.update_total_score
       redirect_to interview_test_results_path(@interview)
     else
       render :new
